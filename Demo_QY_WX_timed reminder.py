@@ -12,7 +12,8 @@ import requests, json
 import datetime
 import time
 
-wx_url = "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=9c3ae4ed-c95b-4fed-a853-aaaaaaaaaaa"    # 测试机器人1号    将此网址替换成你的群聊机器人Webhook地址
+"""wx_url = "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=9c3ae4ed-c95b-4fed-a853-aaaaaaaaaaa"    # 测试机器人1号    将此网址替换成你的群聊机器人Webhook地址"""
+wx_url = "https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=f5883f7e-8218-4fb9-a8ee-7f260e28b868"    # 测试机器人1号    将此网址替换成你的群聊机器人Webhook地址
 send_message1 = "内容1，内容1，内容1！"
 send_message2 = "内容2，内容2，内容2！"
 
@@ -37,7 +38,7 @@ def send_msg(content):
     r = requests.post(wx_url, data, auth=('Content-Type', 'application/json'))
     print(r.json)
 
-def every_time_send_msg(interval_h=0, interval_m=0, interval_s=31, special_h1="08",special_h2="12", special_m="00", mode="special"):    #此处定义了每多长时间重复一次此指令，在这里我设置的是每31秒重复一次。且此处设置定时发送消息的时间点（24小时制），在这里我设置的是8点和12点整。
+def every_time_send_msg(interval_h=0, interval_m=0, interval_s=31, special_h1="09",special_h2="17", special_m="0", mode="special"):    #此处定义了每多长时间重复一次此指令，在这里我设置的是每31秒重复一次。且此处设置定时发送消息的时间点（24小时制），在这里我设置的是8点和12点整。
     """每天指定时间发送指定消息"""
 
     # 设置自动执行间隔时间
@@ -51,14 +52,14 @@ def every_time_send_msg(interval_h=0, interval_m=0, interval_s=31, special_h1="0
             print('正在发送提醒')
             send_msg(send_message1)
         else:
-            print('未到早8点提醒时间')
-        # 下午3点报送一次体温
+            print('九点上班时间')
+        # 九点上班时间
         
         if c_h == special_h2 and c_m == special_m:
             print('正在发送提醒')
             send_msg(send_message2)
         else:
-            print('未到中午12点提醒时间')
+            print('周报填写提醒')
         # 下午5点报送一次轨迹
         
         print("每隔" + str(interval_h) + "小时" + str(interval_m) + "分" + str(interval_s) + "秒执行一次")
